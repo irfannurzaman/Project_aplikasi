@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { DoctorCategory, Gap, HomeProfile, NewsItem, RatedDoctor } from '../../components'
 import { Fire } from '../../config'
 import { colors, fonts, showError, getData } from '../../utils'
-import {ILNullPhoto} from '../../assets'
+import {ILNullPhoto, ILkopi} from '../../assets'
 
 const Doctor = ({navigation}) => {
     const [news, setNews] = useState([])
@@ -49,19 +49,39 @@ const Doctor = ({navigation}) => {
     }
 
     const getCategoryDoctor = () => {
-        Fire.database()
-            .ref('category_doctor/')
-            .once('value')
-            .then(res => {
-                if (res.val()) {
-                    const data = res.val()
-                    const filterData = data.filter(el => el !== null)
-                    setCategoryDoctor(filterData)
-                }
-            })
-            .catch(err => {
-                showError(err.message)
-            })
+        const data = [
+            {
+            id: 1,
+            category: 'Masakan Padang Asam Pedes Manis',
+            price: '15.000',
+            image: ILkopi
+        },
+        {
+            id: 2,
+            category: 'Kapal Api Desa Kebanggan',
+            price: '10.000',
+            image: ''
+        },
+        {
+            id: 3,
+            category: 'Bakso BalungaN',
+            price: '9.000',
+            image: ''
+        },
+        {
+            id: 4,
+            category: 'Jus Tomat',
+            price: '5.000',
+            image: ''
+        },
+        {
+            id: 5,
+            category: 'Seblak',
+            price: '20.000',
+            image: ''
+            },
+        ]
+        setCategoryDoctor(data)
     }
 
     const getNews = () => {
@@ -110,8 +130,9 @@ const Doctor = ({navigation}) => {
                                     categoryDoctor.map(item => {
                                         return <DoctorCategory 
                                         key={item.id} 
-                                        category={item.category} 
-                                        onPress={() => navigation.navigate('ChooseDoctor', item)} />
+                                        category={item}
+                                        onPress={() => navigation.navigate('ChooseDoctor', item)} 
+                                        />
                                     })
                                 }
                                 <Gap width={22} />
@@ -121,7 +142,12 @@ const Doctor = ({navigation}) => {
                     <View style={styles.wrapperSection1}>
                         <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
                         {doctors.map(doctor => {
-                            return <RatedDoctor key={doctor.id} name={doctor.data.fullName} desc={doctor.data.profession} avatar={{uri: doctor.data.photo}} onPress={() => navigation.navigate('DoctorProfile', doctor)} />
+                            return <RatedDoctor 
+                            key={doctor.id} 
+                            name={doctor.data.fullName} 
+                            desc={doctor.data.profession} 
+                            avatar={{uri: doctor.data.photo}} 
+                            onPress={() => navigation.navigate('DoctorProfile', doctor)} />
                         })}
                         <Text style={styles.sectionLabel}>Good News</Text>
                     </View>

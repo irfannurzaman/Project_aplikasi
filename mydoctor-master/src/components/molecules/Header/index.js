@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         {
             paddingHorizontal: 16,
             paddingVertical: 30,
-            backgroundColor: type === 'dark' ? colors.secondary : colors.white,
+            // backgroundColor: type === 'dark' ? colors.secondary : colors.white,
             flexDirection: 'row',
             alignItems: 'center',
             borderBottomLeftRadius: type === 'dark' ? 20 : 0,
