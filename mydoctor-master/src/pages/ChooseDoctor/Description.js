@@ -1,38 +1,32 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from '../../components/atoms'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
 const Description = ({itemCategory}) => {
     return(
     <View>
         <View>
-        <Text style={styles.text}>{itemCategory.category}</Text>
+          <Text style={styles.text}>{(itemCategory.category.length < 70 ? 
+            itemCategory.category : `${itemCategory.category.substr(0, 70)}...` )}</Text>
         </View>
-        <View style={styles.action}>
-        <Button title="Beli"/>
+        <View>
+          <Text style={styles.text}>Rp : 12.000</Text>
+          <Text style={styles.text}>Rp : 12.000</Text>
+          <Text style={styles.text}>Rp : 12.000</Text>
+          <Text style={styles.text}>Rp : 12.000</Text>
+          <Text style={styles.text}>Rp : 12.000</Text>
         </View>
-        {/* // <Tab.Navigator>
-        //    <Tab.Screen name="Home" component={HomeScreen} />
-        //    <Tab.Screen name="Settings" component={SettingsScreen} />
-        // </Tab.Navigator> */}
+        {/* <View style={styles.onRow(itemCategory)}>
+          <View style={styles.action}>
+            <Button title="Beli"/>
+          </View>
+          <View style={styles.keranjang}>
+            <Button title="Tambah Keranjang"/>
+          </View>
+          <View style={styles.message}>
+            <Button title="mes"/>
+          </View>
+        </View> */}
     </View>
     ) 
 }
@@ -43,15 +37,23 @@ const styles = StyleSheet.create({
     text: {
         marginHorizontal: 20,
         marginTop: 20,
-        fontSize: 17,
+        fontSize: 20,
         fontWeight: 'bold'
     },
-    button: {
-        width: 100,
-        height: 150
-    },
+    onRow: (itemCategory) => ({flex: 1, flexDirection: 'row', marginTop: itemCategory.category.length < 40 ? 50 : 20 }),
     action: {
-        paddingHorizontal: 43,
-        paddingTop: 23
+        marginLeft: 10,
+        width: 110,
+        height: 80
+      },
+    keranjang: {
+      marginLeft: 10,
+      width: 210,
+      height: 80
+    },
+    message: {
+      marginLeft: 10,
+      width: 50,
+      height: 80
     }
 })

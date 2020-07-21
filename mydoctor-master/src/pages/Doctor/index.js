@@ -52,7 +52,7 @@ const Doctor = ({navigation}) => {
         const data = [
             {
             id: 1,
-            category: 'Masakan Padang Asam Pedes Manis',
+            category: 'Masakan Padang Asam Pedes Manis ternikmat',
             price: '15.000',
             image: ILkopi
         },
