@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React, { useEffect, useState, useRef } from 'react'
+import { StyleSheet, Text, View, Image, Alert } from 'react-native'
 import { Header, List } from '../../components'
 import { DummyDoctor1 } from '../../assets'
 import { colors } from '../../utils'
@@ -8,17 +8,28 @@ import {Button} from '../../components/atoms'
 import { ButtonBack} from '../../components/molecules'
 import Description from './Description.js'
 import { ScrollView } from 'react-native-gesture-handler'
+import {ButtonSheet} from '../../components/molecules'
+
+
+
 
 const ChooseDoctor = ({navigation, route}) => {
     const itemCategory = route.params
+    const refRBSheet = useRef();
     return (
         <View>
             <ScrollView>
                 <View style={styles.page} >
                     <Image  resizeMode="cover" style={styles.image} source={itemCategory.image}/>
+                    <View style={{width: '100%', 
+                    height: '100%', 
+                    position: 'absolute', 
+                    top: 0, left: 0, 
+                    backgroundColor: 'black', 
+                    opacity: 0.3}}/>
                     <ButtonBack 
                     type='icon-only' 
-                    icon='back-light' 
+                    icon='back-dark' 
                     onPress={() => navigation.goBack()}
                     />
                     <View style={styles.category}>
@@ -28,7 +39,8 @@ const ChooseDoctor = ({navigation, route}) => {
             </ScrollView>
             <View style={styles.onRow}>
               <View style={styles.action}>
-                <Button title="Beli"/>
+                <Button title="Beli" onPress={() => refRBSheet.current.open()} />
+                <ButtonSheet refRBSheet={refRBSheet} />
               </View>
               <View style={styles.keranjang}>
                 <Button title="Tambah Keranjang"/>
@@ -52,10 +64,12 @@ const styles = StyleSheet.create({
     image: {
         height: 500, 
         width: 'auto',
+        position: 'relative'
     },
     category: {
         height: '100%',
         marginTop: -20,
+        marginBottom: 60,
         backgroundColor: 'white',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
@@ -66,7 +80,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        elevation: 5
 
     },
     action: {

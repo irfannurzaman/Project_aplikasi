@@ -11,7 +11,8 @@ import InputChat from './InputChat'
 import Profile from './Profile'
 import ProfileItem from './ProfileItem'
 import Loading from './Loading'
-import ButtonBack from './ButtonBack/ButtonBack.js'
+import ButtonBack from './ButtonBack'
+import ButtonSheet from './ButtonSheet'
 
 export {
     Header, 
@@ -27,5 +28,6 @@ export {
     Profile,
     ProfileItem,
     Loading,
-    ButtonBack
+    ButtonBack,
+    ButtonSheet
 }

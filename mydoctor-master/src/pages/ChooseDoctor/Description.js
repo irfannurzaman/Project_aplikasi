@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { Button } from '../../components/atoms'
+import { DrawHorizontal } from '../../components/atoms'
 
 const Description = ({itemCategory}) => {
     return(
@@ -10,23 +10,23 @@ const Description = ({itemCategory}) => {
             itemCategory.category : `${itemCategory.category.substr(0, 70)}...` )}</Text>
         </View>
         <View>
-          <Text style={styles.text}>Rp : 12.000</Text>
-          <Text style={styles.text}>Rp : 12.000</Text>
-          <Text style={styles.text}>Rp : 12.000</Text>
-          <Text style={styles.text}>Rp : 12.000</Text>
-          <Text style={styles.text}>Rp : 12.000</Text>
+          <Text style={styles.price}>Rp : 12.000</Text>
+          <DrawHorizontal 
+          drawColor = '#d0d9ce'
+          drawWiith = '1'
+          drawTop = '10'
+          />
+          <Text style={styles.text}>Deskripsi Produk</Text>
+          <Text style={{ marginHorizontal: 20, marginVertical: 10, fontSize: 15}}>
+            Garansi Produk 100% CUKUP KIRIM FOTO Karena kami toko sangat konsisten dalam kualitas
+            jangan ketinggalan untuk membeli produk kami. kami sangat terpercaya
+            Garansi Produk 100% CUKUP KIRIM FOTO Karena kami toko sangat konsisten dalam kualitas
+            jangan ketinggalan untuk membeli produk kami. kami sangat terpercaya
+            Garansi Produk 100% CUKUP KIRIM FOTO Karena kami toko sangat konsisten dalam kualitas
+            jangan ketinggalan untuk membeli produk kami. kami sangat terpercaya
+          </Text>
+          <View style={{height: 17, backgroundColor: '#F2F2F4'}}></View>
         </View>
-        {/* <View style={styles.onRow(itemCategory)}>
-          <View style={styles.action}>
-            <Button title="Beli"/>
-          </View>
-          <View style={styles.keranjang}>
-            <Button title="Tambah Keranjang"/>
-          </View>
-          <View style={styles.message}>
-            <Button title="mes"/>
-          </View>
-        </View> */}
     </View>
     ) 
 }
@@ -40,20 +40,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-    onRow: (itemCategory) => ({flex: 1, flexDirection: 'row', marginTop: itemCategory.category.length < 40 ? 50 : 20 }),
-    action: {
-        marginLeft: 10,
-        width: 110,
-        height: 80
-      },
-    keranjang: {
-      marginLeft: 10,
-      width: 210,
-      height: 80
+    price: {
+      marginHorizontal: 20,
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: 'red', 
+      marginTop: 10
     },
-    message: {
-      marginLeft: 10,
-      width: 50,
-      height: 80
+    Discripsi: {
+     marginTop: 3,
+     color: 'red',
+     fontSize: 20,
+     fontWeight: 'bold'
     }
 })
