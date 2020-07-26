@@ -6,7 +6,7 @@ const IsMe = ({text, date}) => {
     return (
         <View style={styles.container}>
             <View style={styles.chatContent}>
-                <Text style={styles.text}>{text}</Text>
+                <Text style={styles.text}>I love you to</Text>
             </View>
             <Text style={styles.date}>{date}</Text>
         </View>
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     container: {
         marginBottom: 20,
         alignItems: 'flex-end',
-        paddingRight: 16
+        paddingRight: 16,
+        backgroundColor: 'pink'
     },
     chatContent: {
         padding: 12,

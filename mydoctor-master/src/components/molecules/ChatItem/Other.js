@@ -9,9 +9,9 @@ const Other = ({text, date, photo}) => {
             <Image source={photo} style={styles.avatar} />
             <View>
                 <View style={styles.chatContent}>
-                    <Text style={styles.text}>{text}</Text>
+                    <Text style={styles.text}>I love You</Text>
                 </View>
-                <Text style={styles.date}>{date}</Text>
+                <Text style={styles.date}>I love You to</Text>
             </View>
         </View>
     )
@@ -21,14 +21,16 @@ export default Other
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20,
-        alignItems: 'flex-end',
-        paddingLeft: 16,
-        flexDirection: 'row'
+        // marginBottom: 20,
+        // alignItems: 'flex-end',
+        // paddingLeft: 16,
+        flexDirection: 'row',
+        backgroundColor: 'red'
     },
     chatContent: {
-        padding: 12,
-        paddingRight: 18,
+        marginTop: 10,
+        padding: 20,
+        width: 250,
         backgroundColor: colors.primary,
         maxWidth: '80%',
         borderRadius: 10,

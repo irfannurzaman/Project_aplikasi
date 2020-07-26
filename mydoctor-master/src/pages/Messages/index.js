@@ -52,7 +52,12 @@ const Messages = ({navigation}) => {
                         id: chat.detailDoctor.uid,
                         data: chat.detailDoctor
                     }  
-                    return <List key={chat.id} profile={{uri: chat.detailDoctor.photo}} name={chat.detailDoctor.fullName} desc={chat.lastContentChat} onPress={() => navigation.navigate('Chatting', dataDoctor)} />
+                    return <List 
+                    key={chat.id} 
+                    profile={{uri: chat.detailDoctor.photo}} 
+                    name={chat.detailDoctor.fullName} 
+                    desc={chat.lastContentChat} 
+                    onPress={() => navigation.navigate('Chatting', dataDoctor)} />
                   })
                 }
                 </ScrollView>

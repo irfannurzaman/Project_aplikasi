@@ -1,24 +1,44 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { IconStar } from '../../../assets'
 import { colors, fonts } from '../../../utils'
 
-const RatedDoctor = ({onPress, name, desc, avatar}) => {
+const RatedDoctor = ({onPress, item}) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
-            <Image source={avatar} style={styles.avatar} />
-            <View style={styles.profile}>
-                <Text style={styles.name}>{name}</Text>
-                <Text style={styles.category}>{desc}</Text>
+        <TouchableOpacity onPress={onPress}>
+        <View style={styles.border}>
+            <View style={styles.container} >
+                <Image style={{height: '100%', width: '100%', borderRadius: 20}} source={item.image}/>
             </View>
-            <View style={styles.rate}>
-                <IconStar />
-                <IconStar />
-                <IconStar />
-                <IconStar />
-                <IconStar />
+            <View style={{
+                marginHorizontal: 30,
+                marginTop: 10,
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            }}>
+                <View>
+                    <Text style={{
+                        fontSize: 25,
+                        fontWeight: 'bold',
+                        color: '#606362'
+                    }}>{item.category}</Text>
+                    <Text style={{
+                        color: '#797d7c'
+                    }}>{`${item.alamat} || ${item.kec}`}
+                    </Text>
+                </View>
+
+                <View>
+                    <Text style={{
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: '#606362'
+                    }}>{item.price}</Text>
+                </View>
+
             </View>
+        </View>
         </TouchableOpacity>
     )
 }
@@ -26,33 +46,19 @@ const RatedDoctor = ({onPress, name, desc, avatar}) => {
 export default RatedDoctor
 
 const styles = StyleSheet.create({
-    avatar: {
-        width: 50,
-        height: 50,
-        borderRadius: 50 / 2,
-        marginRight: 12
-    },
     container: {
+        marginHorizontal: 25,
+        height: 170,
+        width: 'auto',
+        marginTop:0,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingBottom: 16,
-        alignItems: 'center'
+        backgroundColor: 'white',
+        borderRadius: 20,
+        elevation: 5
     },
-    rate: {
-        flexDirection: 'row'
-    },
-    name: {
-        fontSize: 16,
-        fontFamily: fonts.primary[600],
-        color: colors.text.primary
-    },
-    category: {
-        fontSize: 12,
-        fontFamily: fonts.primary.normal,
-        color: colors.text.secondary,
-        marginTop: 2
-    },
-    profile: {
-        flex: 1,
+    border: {
+        width: '100%',
+        height: 250,
+        marginTop: 10
     }
 })

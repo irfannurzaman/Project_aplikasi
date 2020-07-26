@@ -1,27 +1,31 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import RBSheet from "react-native-raw-bottom-sheet";
+import { DetailProduct } from '../../molecules'
 
 
-const ButtonSheet = ({refRBSheet}) => {
+const ButtonSheet = ({refRBSheet, itemCategory, titleButton}) => {
     return(
         <View>
-             <RBSheet
+            <RBSheet
                   ref={refRBSheet}
                   closeOnDragDown={true}
                   closeOnPressMask={false}
                   customStyles={{
                     wrapper: {
-                      backgroundColor: "transparent"
+                      backgroundColor: "transparent",
                     },
                     draggableIcon: {
                       backgroundColor: "#000"
+                    },
+                    container: {
+                      height: 600,
+                      borderTopLeftRadius: 20,
+                      borderTopRightRadius: 20
                     }
                   }}
                 >
-                  <View>
-                    <Text>TES</Text>
-                  </View>
+                <DetailProduct itemCategory={itemCategory} titleButton={titleButton}/>
             </RBSheet>
         </View>
     )

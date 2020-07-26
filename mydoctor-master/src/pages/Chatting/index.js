@@ -5,37 +5,37 @@ import { fonts, colors, getData, showError, getChatTime, setDateChat } from '../
 import { Fire } from '../../config'
 
 const Chatting = ({navigation, route}) => {
-    const dataDoctor = route.params
+    // const dataDoctor = route.params
     const [chatContent, setChatContent] = useState('')
     const [user, setUser] = useState({})
     const [chatData, setChatData] = useState([])
 
     useEffect(() => {
-        getDataUserFromLocal()
-        const chatID = `${user.uid}_${dataDoctor.data.uid}`
-        const urlFirebase = `chatting/${chatID}/allChat/`
-        Fire.database().ref(urlFirebase).on('value', (snapshot) => {
-            if (snapshot.val()) {
-                const dataSnapshot = snapshot.val()
-                const allDataChat = []
-                Object.keys(dataSnapshot).map(key => {
-                    const dataChat = dataSnapshot[key]
-                    const newDataChat = []
-                    Object.keys(dataChat).map(itemChat => {
-                        newDataChat.push({
-                            id: itemChat,
-                            data: dataChat[itemChat]
-                        })
-                    })
-                    allDataChat.push({
-                        id: key,
-                        data: newDataChat
-                    })
-                })
-                setChatData(allDataChat)
-            }
-        })
-    }, [dataDoctor.data.uid, user.uid])
+    //     getDataUserFromLocal()
+    //     const chatID = `${user.uid}_${dataDoctor.data.uid}`
+    //     const urlFirebase = `chatting/${chatID}/allChat/`
+    //     Fire.database().ref(urlFirebase).on('value', (snapshot) => {
+    //         if (snapshot.val()) {
+    //             const dataSnapshot = snapshot.val()
+    //             const allDataChat = []
+    //             Object.keys(dataSnapshot).map(key => {
+    //                 const dataChat = dataSnapshot[key]
+    //                 const newDataChat = []
+    //                 Object.keys(dataChat).map(itemChat => {
+    //                     newDataChat.push({
+    //                         id: itemChat,
+    //                         data: dataChat[itemChat]
+    //                     })
+    //                 })
+    //                 allDataChat.push({
+    //                     id: key,
+    //                     data: newDataChat
+    //                 })
+    //             })
+    //             setChatData(allDataChat)
+    //         }
+    //     })
+    }, [])
 
     const getDataUserFromLocal = () => {
         getData('user').then(res => {
@@ -51,14 +51,14 @@ const Chatting = ({navigation, route}) => {
             chatTime: getChatTime(today),
             chatContent: chatContent
         }
-        const chatID = `${user.uid}_${dataDoctor.data.uid}`
+        // const chatID = `${user.uid}_${dataDoctor.data.uid}`
         const urlFirebase = `chatting/${chatID}/allChat/${setDateChat(today)}`
         const urlMessageUser = `messages/${user.uid}/${chatID}`
-        const urlMessageDoctor = `messages/${dataDoctor.data.uid}/${chatID}`
+        // const urlMessageDoctor = `messages/${dataDoctor.data.uid}/${chatID}`
         const dataHistoryChatForUser = {
             lastContentChat: chatContent,
             lastChatDate: today.getTime(),
-            uidPartner: dataDoctor.data.uid,
+            // uidPartner: dataDoctor.data.uid,
         }
         const dataHistoryChatForDoctor = {
             lastContentChat: chatContent,
@@ -80,7 +80,7 @@ const Chatting = ({navigation, route}) => {
 
     return (
         <View style={styles.page}>
-            <Header type="dark-profile" title={dataDoctor.data.fullName} desc={dataDoctor.data.category} photo={{uri: dataDoctor.data.photo}} onPress={() => navigation.goBack()} />
+            <Header type="dark-profile" navigation={navigation}/>
             <View style={styles.content}>
                 <ScrollView 
                       showsVerticalScrollIndicator={false}
@@ -94,7 +94,7 @@ const Chatting = ({navigation, route}) => {
                                 <Text style={styles.chatDate}>{chat.id}</Text>
                                 {chat.data.map(itemChat => {
                                     const isMe = itemChat.data.sendBy === user.uid
-                                    return <ChatItem key={itemChat.id} isMe={isMe} text={itemChat.data.chatContent} date={itemChat.data.chatTime} photo={!isMe && {uri: dataDoctor.data.photo}} />
+                                    // return <ChatItem key={itemChat.id} isMe={isMe} text={itemChat.data.chatContent} date={itemChat.data.chatTime} photo={!isMe && {uri: dataDoctor.data.photo}} />
                                 })}
                             </View>
                         )

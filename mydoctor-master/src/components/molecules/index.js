@@ -13,6 +13,7 @@ import ProfileItem from './ProfileItem'
 import Loading from './Loading'
 import ButtonBack from './ButtonBack'
 import ButtonSheet from './ButtonSheet'
+import DetailProduct from './DetailProduct'
 
 export {
     Header, 
@@ -29,5 +30,6 @@ export {
     ProfileItem,
     Loading,
     ButtonBack,
-    ButtonSheet
+    ButtonSheet,
+    DetailProduct
 }

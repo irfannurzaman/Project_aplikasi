@@ -58,6 +58,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 53,
         paddingVertical: 12,
-        backgroundColor: colors.secondary
+        backgroundColor: colors.secondary,
+        borderRadius: 30,
+        bottom: 20,
+        marginHorizontal: 20
     }
 })
