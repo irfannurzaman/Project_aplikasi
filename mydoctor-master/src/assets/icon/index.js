@@ -19,6 +19,10 @@ import IconHelp from './ic-help.svg';
 import IconBack from './ic-button-back.svg';
 import IconMessage_icon from './ic-message-icon.png'
 import IconSearch from './ic-search.png'
+import IcMaps from './ic-maps.png'
+import Delivery from './ic-delivery.png'
+import Sale from './ic-sale.png'
+import Jam from './24Jam.png'
 
 export {
     IconBackDark, 
@@ -41,5 +45,9 @@ export {
     IconHelp,
     IconBack,
     IconMessage_icon,
-    IconSearch
+    IconSearch,
+    IcMaps,
+    Delivery,
+    Sale,
+    Jam
 }

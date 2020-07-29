@@ -25,7 +25,6 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const IconBottom = (props) => {
-    console.log('sukses', props)
     const { color, focused} = props.data
     let colorSelected = focused ? color : '#0f0f0f'
     return (
@@ -51,10 +50,10 @@ const IconBottom = (props) => {
                 source={props.image} 
                 style={{ 
                 width: 30, 
-                height: props.image == 'news.png' ? 25 : 30, 
+                height: props.image == 29 ? 25 : 30, 
                 tintColor: colorSelected
-             }}
-                 />
+                }}
+            />
             </View>
         </View>
     )
@@ -85,8 +84,8 @@ const MainApp = () => {
             />
 
             <Tab.Screen 
-            name="Hospitals" 
-            component={Hospitals}
+            name="Chatting" 
+            component={Chatting}
             options={{
                 tabBarIcon: (props) => <IconBottom data={props} image={News}/>,
                 title: ''
@@ -116,7 +115,7 @@ const Router = () => {
             <Stack.Screen name="UploadPhoto" component={UploadPhoto} options={{headerShown: false}}/>
             <Stack.Screen name="MainApp" component={MainApp} options={{headerShown: false}}/>
             <Stack.Screen name="ChooseDoctor" component={ChooseDoctor} options={{headerShown: false}}/>
-            <Stack.Screen name="Chatting" component={Chatting} options={{headerShown: false}}/>
+            <Stack.Screen name="Maps" component={Hospitals} options={{headerShown: false}}/>
             <Stack.Screen name="UserProfile" component={UserProfile} options={{headerShown: false}}/>
             <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={{headerShown: false}}/>
             <Stack.Screen name="DoctorProfile" component={DoctorProfile} options={{headerShown: false}}/>
