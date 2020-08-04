@@ -8,7 +8,7 @@ const HomeProfile = ({onPress, profile}) => {
         <TouchableOpacity style={styles.container} onPress={onPress}>
         <Image source={require('../../../../assets/profile/SAM_0109.jpg')} style={styles.avatar} />
         <View>
-            <Text style={styles.name}>{profile.fullName}</Text>
+            {/* <Text style={styles.name}>{profile.fullName}</Text> */}
             <Text style={styles.profession}>{profile.profession}</Text>
         </View>
     </TouchableOpacity>

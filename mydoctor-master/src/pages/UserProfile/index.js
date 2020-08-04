@@ -22,7 +22,7 @@ const UserProfile = ({navigation, route}) => {
         <View style={styles.page}>
             <Header title="Profile" onPress={() => navigation.goBack()} />
             <Gap height={10} />
-            { profile.fullName.length > 0 && <Profile name={profile.fullName} desc={profile.profession} photo={profile.photo} /> }
+            {/* { profile.fullName.length > 0 && <Profile name={profile.fullName} desc={profile.profession} photo={profile.photo} /> } */}
             <Gap height={14} />
             <List name="Edit Profile" desc="Last Update Yesterday" type="next" icon="edit-profile" onPress={() => navigation.navigate('UpdateProfile')} />
             <List name="Language" desc="Last Update Yesterday" type="next" icon="language" />

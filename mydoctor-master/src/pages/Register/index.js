@@ -22,7 +22,7 @@ const Register = ({navigation}) => {
                 dispatch({type: 'SET_LOADING', value: false})
                 setForm('reset')
                 const data = {
-                    fullName: form.fullName,
+                    // fullName: form.fullName,
                     profession: form.profession,
                     email: form.email,
                     uid: success.user.uid

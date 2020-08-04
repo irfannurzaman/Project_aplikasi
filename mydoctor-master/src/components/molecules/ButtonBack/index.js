@@ -10,7 +10,9 @@ const ButtonBack = ({icon, onPress, type}) => {
                 position: 'relative',
                 height: 40, 
                 width: 40, 
-                borderRadius: 100}}>
+                borderRadius: 100,
+                opacity: 0.6
+                }}>
            </View>
             <View style={{
                 position: 'absolute',

@@ -16,12 +16,12 @@ const ButtonSheet = ({refRBSheet, itemCategory, titleButton}) => {
                       backgroundColor: "transparent",
                     },
                     draggableIcon: {
-                      backgroundColor: "#000"
+                      backgroundColor: "#bebec2"
                     },
                     container: {
-                      height: 600,
-                      borderTopLeftRadius: 20,
-                      borderTopRightRadius: 20
+                      height: 350,
+                      borderTopLeftRadius: 25,
+                      borderTopRightRadius: 25
                     }
                   }}
                 >

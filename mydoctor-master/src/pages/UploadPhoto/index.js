@@ -7,7 +7,7 @@ import { Fire } from '../../config';
 import { colors, fonts, showError, storeData } from '../../utils';
 
 const UploadPhoto = ({navigation, route}) => {
-    const {fullName, profession, uid} = route.params
+    // const {fullName, profession, uid} = route.params
     const [photoForDB, setPhotoForDB] = useState('')
     const [hasPhoto, setHasPhoto] = useState(false)
     const [photo, setPhoto] = useState(ILNullPhoto)
@@ -46,7 +46,7 @@ const UploadPhoto = ({navigation, route}) => {
                         { hasPhoto && <IconRemovePhoto style={styles.addPhoto} /> }
                         { !hasPhoto && <IconAddPhoto style={styles.addPhoto} /> }
                     </TouchableOpacity>
-                    <Text style={styles.name}>{fullName}</Text>
+                    {/* <Text style={styles.name}>{fullName}</Text> */}
                     <Text style={styles.profession}>{profession}</Text>
                 </View>
                 <View>

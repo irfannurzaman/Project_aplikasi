@@ -49,7 +49,6 @@ const Doctor = ({navigation}) => {
   }, [navigation]);
 
   const getCategoryDoctor = async () => {
-    console.log('sukses', 'selalu');
     axios
       .get('http://11f3b5eac1cf.ngrok.io/username')
       .then(res =>
@@ -147,6 +146,8 @@ const Doctor = ({navigation}) => {
     extrapolate: 'clamp',
   });
 
+  console.log('sukses', headerHeight)
+
   return (
     <View>
       <ScrollView
@@ -167,8 +168,6 @@ const Doctor = ({navigation}) => {
             />
           </View>
         </View>
-        {/* <View style={styles.wrapperOvo}> */}
-        {/* </View> */}
         <View style={styles.wrapperScroll}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.category}>
@@ -206,10 +205,10 @@ const Doctor = ({navigation}) => {
             />
           );
         })}
-        <Gap height={30} />
+        <Gap height={70} />
       </ScrollView>
       <Animated.View style={[styles.header, {height: headerHeight}]}>
-        <View style={styles.bar}>
+        <View style={styles.bar(headerHeight)}>
           <View style={styles.searchBar}>
             <TextInput
               placeholder="What do you want to eat?"
@@ -253,11 +252,11 @@ const styles = StyleSheet.create({
     width: 330,
     overflow: 'hidden',
   },
-  bar: {
+  bar: (val) => ({
     height: '100%',
     backgroundColor: 'transparent',
     flex: 1,
-  },
+  }),
   searchBar: {
     backgroundColor: 'white',
     height: 50,
