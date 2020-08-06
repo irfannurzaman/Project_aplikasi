@@ -37,7 +37,7 @@ const ChooseDoctor = ({navigation, route}) => {
             </View>
             <View style={styles.onRow}>
               <View style={styles.message}>
-                <TouchableOpacity onPress={() => navigation.navigate('Chatting')} >
+                <TouchableOpacity onPress={() => navigation.navigate('Maps')} >
                     <Image style={{height: 50, width: 50, marginTop: 5}} source={IcMaps}/>
                 </TouchableOpacity>
               </View>

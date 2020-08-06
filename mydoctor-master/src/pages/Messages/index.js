@@ -42,14 +42,6 @@ const Messages = ({navigation}) => {
     });
   };
 
-  const moveBall = () => {
-      Animated.timing(leftValue, {
-          toValue: 100,
-          duration: 1000,
-          useNativeDriver: false
-      }).start()
-  }
-
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -70,19 +62,6 @@ const Messages = ({navigation}) => {
               />
             );
           })}
-          <Animated.View
-            style={[{
-              height: 100,
-              width: 100,
-              backgroundColor: 'red',
-              borderRadius: 50,
-              marginLeft: leftValue,
-              marginRight: leftValue
-            }]}
-          />
-          <TouchableOpacity onPress={moveBall}>
-            <Text>onclick</Text>
-          </TouchableOpacity>
         </ScrollView>
       </View>
     </View>

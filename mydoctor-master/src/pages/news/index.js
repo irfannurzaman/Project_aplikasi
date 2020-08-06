@@ -10,36 +10,39 @@ import {
 } from 'react-native';
 import {colors} from '../../utils';
 import {PecelLele, Seblak, Bakso, Ceker} from '../../assets';
+import {UploadStatus} from '../../components';
 
-const PageNews = () => {
+const PageNews = ({navigation}) => {
   const news = [
     {
       val: 1,
       image: PecelLele,
-      title: 'Pecel lele dengan variasi baru, silakan hubungi nomer 08212223344'
+      title:
+        'Pecel lele dengan variasi baru, silakan hubungi nomer 08212223344',
     },
     {
-        val: 2,
-        image: Seblak,
-        title: 'ayo bun seblak terbaru, pedas nikmat nya menggoda'
+      val: 2,
+      image: Seblak,
+      title: 'ayo bun seblak terbaru, pedas nikmat nya menggoda',
     },
     {
-        val: 3,
-        image: Bakso,
-        title: 'bakso balungan dengan rasa yang nikmat, ini variasi baru lo, gak nyesel kalo gak nyicipin'
+      val: 3,
+      image: Bakso,
+      title:
+        'bakso balungan dengan rasa yang nikmat, ini variasi baru lo, gak nyesel kalo gak nyicipin',
     },
     {
-        val: 4,
-        image: Ceker,
-        title: 'ceker setan dengan pedas yang menggila'
+      val: 4,
+      image: Ceker,
+      title: 'ceker setan dengan pedas yang menggila',
     },
   ];
 
   const [scroll, setScroll] = useState(new Animated.Value(0));
 
-  const HEADER_MAX_HEIGHT = 80;
-  const HEADER_MIN_HEIGHT = 80;
-  const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+  const HEADER_MAX_HEIGHT = 90;
+  const HEADER_MIN_HEIGHT = 90;
+  const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT + HEADER_MIN_HEIGHT;
 
   const headerHeight = scroll.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -57,8 +60,7 @@ const PageNews = () => {
               },
             },
           },
-        ])}
-        style={{marginTop: 80}}>
+        ])}>
         {news.map(items => (
           <View style={styles.marginOut}>
             <View
@@ -68,9 +70,11 @@ const PageNews = () => {
                 marginHorizontal: 10,
                 marginVertical: 10,
                 borderRadius: 10,
-              }}
-            >
-            <Image style={{height: '100%', width: '100%'}} source={items.image}/>
+              }}>
+              <Image
+                style={{height: '100%', width: '100%'}}
+                source={items.image}
+              />
             </View>
             <View style={{flexDirection: 'row', marginHorizontal: 10}}>
               <TouchableOpacity style={styles.page('buy')}>
@@ -97,10 +101,15 @@ const PageNews = () => {
             </View>
           </View>
         ))}
-        <View style={{marginBottom: 100}}></View>
+        <View style={{marginBottom: 100}} />
       </ScrollView>
       <Animated.View style={[styles.header, {height: headerHeight}]}>
-        <View style={styles.bar} />
+        <View
+          style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{width: 50, height: 'auto', marginRight: 20}}>
+            <UploadStatus />
+          </View>
+        </View>
       </Animated.View>
     </View>
   );
@@ -115,13 +124,6 @@ const styles = StyleSheet.create({
     right: 0,
     width: 'auto',
     overflow: 'hidden',
-  },
-  bar: {
-    height: '100%',
-    backgroundColor: colors.primary,
-    flex: 1,
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
   },
   marginOut: {
     width: 'auto',

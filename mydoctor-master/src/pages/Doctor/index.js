@@ -13,6 +13,7 @@ import {
   HomeProfile,
   NewsItem,
   RatedDoctor,
+  SearchIcon
 } from '../../components';
 import {colors, fonts, showError, getData} from '../../utils';
 import {
@@ -26,13 +27,15 @@ import {
   IcMaps,
   Delivery,
   Sale,
-  Jam
+  Jam,
 } from '../../assets';
 import axios from 'axios';
+import {onChange} from 'react-native-reanimated';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Doctor = ({navigation}) => {
   const [news, setNews] = useState([]);
-  const [category, setCategory] = useState([])
+  const [category, setCategory] = useState([]);
   const [categoryDoctor, setCategoryDoctor] = useState([]);
   const [profile, setProfile] = useState({
     photo: ILNullPhoto,
@@ -111,19 +114,19 @@ const Doctor = ({navigation}) => {
       },
       {
         image: Sale,
-        text: 'Promo'
+        text: 'Promo',
       },
       {
         image: Jam,
-        text: '24 Jam'
+        text: '24 Jam',
       },
       {
         image: Delivery,
-        text: 'Promo Antar'
+        text: 'Promo Antar',
       },
     ];
 
-    setCategory(data)
+    setCategory(data);
   };
 
   const getUserData = () => {
@@ -145,8 +148,6 @@ const Doctor = ({navigation}) => {
     outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
     extrapolate: 'clamp',
   });
-
-  console.log('sukses', headerHeight)
 
   return (
     <View>
@@ -209,32 +210,7 @@ const Doctor = ({navigation}) => {
       </ScrollView>
       <Animated.View style={[styles.header, {height: headerHeight}]}>
         <View style={styles.bar(headerHeight)}>
-          <View style={styles.searchBar}>
-            <TextInput
-              placeholder="What do you want to eat?"
-              style={{
-                marginHorizontal: 10,
-                position: 'relative',
-              }}
-            />
-            <View
-              style={{
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-              }}>
-              <Image
-                source={IconSearch}
-                style={{
-                  width: 25,
-                  height: 25,
-                  marginHorizontal: 10,
-                }}
-              />
-            </View>
-          </View>
+          <SearchIcon navigation={navigation} auto={false}/>
         </View>
       </Animated.View>
     </View>
@@ -252,23 +228,11 @@ const styles = StyleSheet.create({
     width: 330,
     overflow: 'hidden',
   },
-  bar: (val) => ({
+  bar: val => ({
     height: '100%',
     backgroundColor: 'transparent',
     flex: 1,
   }),
-  searchBar: {
-    backgroundColor: 'white',
-    height: 50,
-    width: 300,
-    marginHorizontal: 20,
-    position: 'absolute',
-    borderRadius: 20,
-    bottom: 5,
-    elevation: 2,
-    borderWidth: 0.1,
-    borderColor: '#dadbd9',
-  },
   page: {
     // backgroundColor: colors.secondary,
     // backgroundColor: 'red',

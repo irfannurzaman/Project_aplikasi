@@ -20,7 +20,7 @@ import {
 } from '../pages';
 import {colors} from '../utils';
 import {buttonHome, message, News, cart} from '../assets';
-import {BottomNavigator} from '../components';
+import { Search } from '../components';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -97,6 +97,18 @@ const MainApp = () => {
   );
 };
 
+const MyModalSearch = () => {
+  return (
+    <Stack.Navigator mode="modal">
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  )
+}
+
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="Splash">
@@ -158,6 +170,11 @@ const Router = () => {
       <Stack.Screen
         name="Chatting"
         component={Chatting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MyModalSearch"
+        component={MyModalSearch}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

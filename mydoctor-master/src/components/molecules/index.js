@@ -14,6 +14,9 @@ import Loading from './Loading'
 import ButtonBack from './ButtonBack'
 import ButtonSheet from './ButtonSheet'
 import DetailProduct from './DetailProduct'
+import Search from './Search'
+import SearchIcon from './SearchIcon/'
+import UploadStatus from './UploadStatus/'
 
 export {
     Header, 
@@ -31,5 +34,8 @@ export {
     Loading,
     ButtonBack,
     ButtonSheet,
-    DetailProduct
+    DetailProduct,
+    Search,
+    SearchIcon,
+    UploadStatus
 }
