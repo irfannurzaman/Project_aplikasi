@@ -1,41 +1,47 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, Image, View} from 'react-native';
-import {Camera} from '../../../assets';
-import ImagePicker from 'react-native-image-picker'
+import React from 'react';
+import {TextInput, View, Text, TouchableOpacity, Animated} from 'react-native';
 
-const UploadStatus = ({}) => {
-  const [photo, setPhoto] = useState('');
-  const [photoForDB, setPhotoForDB] = useState('');
-  const getImage = () => {
-    ImagePicker.launchImageLibrary(
-    //   {quality: 0.5, maxWidth: 200, maxHeight: 200},
-      response => {
-        if (response.didCancel || response.error) {
-          showError('oops, sepertinya anda tidak memilih foto nya?');
-        } else {
-          const source = {uri: response.uri};
-          setPhoto(source);
-          setPhotoForDB(`data:${response.type};base64, ${response.data}`);
-        }
-      },
-    );
-  };
-
+const UpdateStatus = ({navigation}) => {
+  const [value, onChangeText] = React.useState();
+  const [y_rotation] = React.useState(new Animated.Value(1))
+  const rotation = y_rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '45deg'],
+  })
   return (
-    <TouchableOpacity
-      onPress={getImage}
-      style={{
-        marginTop: 30,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Image
-        style={{height: 40, width: 40}}
-        source={Camera}
+    <View>
+      <TextInput
+        autoFocus={true}
+        value={value}
+        onChangeText={text => onChangeText(text)}
+        defaultValue={value}
+        placeholder={'Ketik Status'}
+        placeholderTextColor={'white'}
+        textAlign={'center'}
+        multiline={true}
+        maxLength={100}
+        selectionColor={'white'}
+        style={{
+          backgroundColor: 'grey',
+          width: '100%',
+          height: '100%',
+          fontSize: 25,
+        }}
       />
-    </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('PageNews')} style={{position: 'absolute'}}>
+        <Animated.View style={[{transform: [{rotate: rotation}]}]}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 35,
+              marginHorizontal: 15,
+              marginTop: 15,
+            }}>
+            +
+          </Text>
+        </Animated.View>
+      </TouchableOpacity>
+    </View>
   );
 };
-
-export default UploadStatus;
+export default UpdateStatus;

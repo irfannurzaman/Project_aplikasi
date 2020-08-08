@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Hospitals = ({navigation}) => {
+const Maps = ({navigation}) => {
   const [region, setRegion] = useState();
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -77,7 +77,8 @@ const Hospitals = ({navigation}) => {
         <View>
           <ButtonBack
             type="icon-only"
-            icon="back-dark"
+            icon="back-light"
+            color='#272727'
             onPress={() => navigation.goBack()}
           />
         </View>
@@ -86,4 +87,4 @@ const Hospitals = ({navigation}) => {
   );
 };
 
-export default Hospitals;
+export default Maps;

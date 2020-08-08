@@ -13,7 +13,7 @@ import {
   HomeProfile,
   NewsItem,
   RatedDoctor,
-  SearchIcon
+  SearchIcon,
 } from '../../components';
 import {colors, fonts, showError, getData} from '../../utils';
 import {
@@ -33,7 +33,7 @@ import axios from 'axios';
 import {onChange} from 'react-native-reanimated';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Doctor = ({navigation}) => {
+const Home = ({navigation}) => {
   const [news, setNews] = useState([]);
   const [category, setCategory] = useState([]);
   const [categoryDoctor, setCategoryDoctor] = useState([]);
@@ -41,6 +41,13 @@ const Doctor = ({navigation}) => {
     photo: ILNullPhoto,
     fullName: '',
     profession: '',
+  });
+  const [scroll] = useState(new Animated.Value(0));
+  const HEADER_SCROLL_DISTANCE = 200 - 80;
+  const headerHeight = scroll.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE],
+    outputRange: [200, 80],
+    extrapolate: 'clamp',
   });
 
   useEffect(() => {
@@ -69,6 +76,7 @@ const Doctor = ({navigation}) => {
         image: ILkopi,
         alamat: 'Desa Kebanggan',
         kec: 'Moga',
+        distance: '10KM'
       },
       {
         id: 2,
@@ -77,6 +85,7 @@ const Doctor = ({navigation}) => {
         image: Ceker,
         alamat: 'Desa Gendoang',
         kec: 'Moga',
+        distance: '4KM'
       },
       {
         id: 3,
@@ -85,6 +94,7 @@ const Doctor = ({navigation}) => {
         image: Seblak,
         alamat: 'Randudongkal',
         kec: 'Randudongkal',
+        distance: '10KM'
       },
       {
         id: 4,
@@ -93,6 +103,7 @@ const Doctor = ({navigation}) => {
         image: Bakso,
         alamat: 'Sima',
         kec: 'Moga',
+        distance: '1KM'
       },
       {
         id: 5,
@@ -101,6 +112,7 @@ const Doctor = ({navigation}) => {
         image: PecelLele,
         alamat: 'MOga',
         kec: 'Moga',
+        distance: '6KM'
       },
     ];
     setCategoryDoctor(data);
@@ -136,18 +148,6 @@ const Doctor = ({navigation}) => {
       setProfile(res);
     });
   };
-
-  const [scroll, setScroll] = useState(new Animated.Value(0));
-
-  const HEADER_MAX_HEIGHT = 200;
-  const HEADER_MIN_HEIGHT = 80;
-  const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-
-  const headerHeight = scroll.interpolate({
-    inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-    extrapolate: 'clamp',
-  });
 
   return (
     <View>
@@ -191,7 +191,7 @@ const Doctor = ({navigation}) => {
             return (
               <RatedDoctor
                 item={item}
-                onPress={() => navigation.navigate('ChooseDoctor', item)}
+                onPress={() => navigation.navigate('ItemsProduct', item)}
               />
             );
           })}
@@ -209,15 +209,15 @@ const Doctor = ({navigation}) => {
         <Gap height={70} />
       </ScrollView>
       <Animated.View style={[styles.header, {height: headerHeight}]}>
-        <View style={styles.bar(headerHeight)}>
-          <SearchIcon navigation={navigation} auto={false}/>
+        <View style={styles.bar(scroll)}>
+          <SearchIcon navigation={navigation} auto={false} />
         </View>
       </Animated.View>
     </View>
   );
 };
 
-export default Doctor;
+export default Home;
 
 const styles = StyleSheet.create({
   header: {
@@ -230,12 +230,9 @@ const styles = StyleSheet.create({
   },
   bar: val => ({
     height: '100%',
-    backgroundColor: 'transparent',
     flex: 1,
   }),
   page: {
-    // backgroundColor: colors.secondary,
-    // backgroundColor: 'red',
     flex: 1,
   },
   content: {

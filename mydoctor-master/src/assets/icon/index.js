@@ -24,6 +24,7 @@ import Delivery from './ic-delivery.png'
 import Sale from './ic-sale.png'
 import Jam from './24Jam.png'
 import Camera from './ic-camera.png'
+import Plus from './Ic-Plus.png'
 
 export {
     IconBackDark, 
@@ -51,5 +52,6 @@ export {
     Delivery,
     Sale,
     Jam,
-    Camera
+    Camera,
+    Plus
 }

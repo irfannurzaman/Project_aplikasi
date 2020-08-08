@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Animated} from 'react-native';
+import {View, Image, Animated, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -8,19 +8,19 @@ import {
   Register,
   Login,
   UploadPhoto,
-  Doctor,
+  Home,
   Messages,
-  Hospitals,
-  ChooseDoctor,
+  Maps,
+  ItemsProduct,
   Chatting,
   UserProfile,
   UpdateProfile,
   DoctorProfile,
-  PageNews
+  PageNews,
 } from '../pages';
-import {colors} from '../utils';
-import {buttonHome, message, News, cart} from '../assets';
-import { Search } from '../components';
+import {useSelector} from 'react-redux'
+import {buttonHome, message, News} from '../assets';
+import {Search, UploadStatus} from '../components';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,16 +54,18 @@ const MainApp = () => {
       tabBarOptions={{
         style: {
           height: 60,
-          backgroundColor: '#272727',
+          // backgroundColor: '#272727',
           borderRadius: 20,
           position: 'absolute',
           marginBottom: 20,
           marginHorizontal: 20,
+          borderWidth: 0.5,
+          borderColor: '#272727'
         },
       }}>
       <Tab.Screen
         name="Home"
-        component={Doctor}
+        component={Home}
         options={{
           tabBarIcon: props => (
             <IconBottom data={props} image={buttonHome} ky={'hm'} />
@@ -93,6 +95,7 @@ const MainApp = () => {
           title: '',
         }}
       />
+  
     </Tab.Navigator>
   );
 };
@@ -106,8 +109,8 @@ const MyModalSearch = () => {
         options={{headerShown: false}}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 const Router = () => {
   return (
@@ -143,13 +146,13 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="ChooseDoctor"
-        component={ChooseDoctor}
+        name="ItemsProduct"
+        component={ItemsProduct}
         options={{headerShown: false}}
       />
       <Stack.Screen
         name="Maps"
-        component={Hospitals}
+        component={Maps}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -175,6 +178,11 @@ const Router = () => {
       <Stack.Screen
         name="MyModalSearch"
         component={MyModalSearch}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UploadStatus"
+        component={UploadStatus}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView, Animated} from 'react-native';
-import {List} from '../../components';
+import {List, TabBar} from '../../components';
 import {colors, fonts, getData} from '../../utils';
 import {DummyDoctor3, DummyDoctor1, DummyDoctor2} from '../../assets';
 import {Fire} from '../../config';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Messages = ({navigation}) => {
   const [user, setUser] = useState({});

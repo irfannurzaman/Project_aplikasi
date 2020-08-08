@@ -3,10 +3,10 @@ import GetStarted from './GetStarted'
 import Register from './Register'
 import Login from './Login'
 import UploadPhoto from './UploadPhoto'
-import Doctor from './Doctor'
+import Home from './Home'
 import Messages from './Messages'
-import Hospitals from './Hospitals'
-import ChooseDoctor from './ChooseDoctor'
+import Maps from './Maps'
+import ItemsProduct from './ItemsProduct'
 import Chatting from './Chatting'
 import UserProfile from './UserProfile'
 import UpdateProfile from './UpdateProfile'
@@ -19,10 +19,10 @@ export {
     Register, 
     Login, 
     UploadPhoto, 
-    Doctor, 
+    Home,
     Messages, 
-    Hospitals,
-    ChooseDoctor, 
+    Maps,
+    ItemsProduct, 
     Chatting, 
     UserProfile, 
     UpdateProfile,

@@ -1,19 +1,16 @@
 import React, {useState, useRef } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import { colors } from '../../utils'
 import { ButtonBack, Button,ButtonSheet } from '../../components'
-import Description from './Description.js'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import {IconMessage_icon, IcMaps} from '../../assets'
 
 
 
 
-const ChooseDoctor = ({navigation, route}) => {
+const ItemsProduct = ({navigation, route}) => {
     const [state, setState] = useState()
 
     const itemCategory = route.params
-    const refRBSheet = useRef();
     return (
         <View style={{flex: 1, backgroundColor: 'red'}}>
             <View style={styles.page} >
@@ -28,12 +25,10 @@ const ChooseDoctor = ({navigation, route}) => {
                     />
                     <ButtonBack 
                     type='icon-only' 
-                    icon='back-dark' 
+                    icon='back-light' 
+                    color='#272727'
                     onPress={() => navigation.goBack()}
                     />
-                    {/* <View style={styles.category}>
-                        <Description navigation={navigation} itemCategory={itemCategory}/>
-                    </View> */}
             </View>
             <View style={styles.onRow}>
               <View style={styles.message}>
@@ -42,20 +37,20 @@ const ChooseDoctor = ({navigation, route}) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.keranjang}>
-                <Button title="Beli" onPress={() => {refRBSheet.current.open(), setState('Beli')}} />
+                <Button title="Beli" onPress={() => setState('beli') } />
               </View>
               <View style={styles.message}>
                 <TouchableOpacity onPress={() => navigation.navigate('Chatting')} >
                     <Image style={{height: 30, width: 30, marginTop: 5}} source={IconMessage_icon}/>
                 </TouchableOpacity>
               </View>
-              <ButtonSheet refRBSheet={refRBSheet} itemCategory={itemCategory} titleButton={state} />
             </View>
+            <ButtonSheet state={state} setState={setState}/>
         </View>
     )
 }
 
-export default ChooseDoctor
+export default ItemsProduct
 
 const styles = StyleSheet.create({
     page: {
