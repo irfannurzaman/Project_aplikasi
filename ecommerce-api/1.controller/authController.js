@@ -1,6 +1,6 @@
 const db = require('../database')
 
-module.exports = {
+module.exports = { 
 
 //     getProfile : (req, res) => {
 //         db.query(`SELECT * FROM profil where userid = ${req.query.userId}`, (err, result) => {
@@ -153,8 +153,7 @@ module.exports = {
 //     },
 
     getLogin: (req, res) => {
-        console.log(req)
-        db.query(`SELECT * FROM login WHERE username=${res.username} and password=${res.password}`, (err, result) => {
+        db.query("SELECT * FROM data_aplkasi.login WHERE username= 'irfan@yahoo.com'", (err, result) => {
             res.send(result)
         })
     }

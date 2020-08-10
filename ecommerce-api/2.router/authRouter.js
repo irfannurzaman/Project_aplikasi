@@ -3,6 +3,7 @@ var router = express.Router()
 
 
 const {authController} = require('../1.controller/index')
+console.log('sukses1', authController.getLogin)
 var multer = require('multer')
 var upload = require('../3.helper/multer')
 var { multerStorageConfig, filterConfig} = require('../4.helper')

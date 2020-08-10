@@ -82,6 +82,7 @@ const UpdateProfile = ({navigation}) => {
                 showError('oops, sepertinya anda tidak memilih foto nya?')
             } else {
                 const source = {uri: response.uri}
+                console.log('sukses12', source)
                 setPhoto(source)
                 setPhotoForDB(`data:${response.type};base64, ${response.data}`)
             }  
@@ -95,7 +96,7 @@ const UpdateProfile = ({navigation}) => {
                 <View style={styles.content}>
                     <Profile isRemove photo={photo} onPress={getImage} />
                     <Gap height={26} />
-                    {/* <Input label="Full Name" value={profile.fullName} onChangeText={(value) => changeText('fullName', value)} /> */}
+                    <Input label="Full Name" value={profile.fullName} onChangeText={(value) => changeText('fullName', value)} />
                     <Gap height={24} />
                     <Input label="Pekerjaan" value={profile.profession} onChangeText={(value) => changeText('profession', value)} />
                     <Gap height={24} />

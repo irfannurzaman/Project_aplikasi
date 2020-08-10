@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, View, Text, Animated, Image} from 'react-native';
 import {Pencile, Camera} from '../../../assets';
+import {showError} from '../../../utils';
+import ImagePicker from 'react-native-image-picker';
 
 const ButtonAddStatus = ({setState, setHeight, navigation}) => {
   const [y_translate] = useState(new Animated.Value(0));
   const [y_translate1, sety_translate1] = useState(new Animated.Value(1));
   const [menu_expanded, setmenu_expanded] = useState(false);
+
   const menu_moveY = y_translate.interpolate({
     inputRange: [0, 5],
     outputRange: [0, 10],
@@ -18,7 +21,7 @@ const ButtonAddStatus = ({setState, setHeight, navigation}) => {
         Animated.spring(y_translate, {
           toValue: 1,
           friction: 2,
-          tension: 10
+          tension: 10,
         }).start(),
       ]);
       sety_translate1(new Animated.Value(0));
@@ -30,22 +33,40 @@ const ButtonAddStatus = ({setState, setHeight, navigation}) => {
       Animated.spring(y_translate, {
         toValue: 0,
         friction: 2,
-        tension: 10
+        tension: 10,
       }).start();
       sety_translate1(new Animated.Value(1));
     }
   };
 
-  const onClickStatus = val => {
-    setState(true);
-    setHeight(700);
-    val.navigate('UploadStatus');
+  const onClickStatus = (val, key) => {
+    if (key == 'pencile') {
+      setState(true);
+      setHeight(700);
+      val.navigate('UploadStatus', '');
+    } else {
+      ImagePicker.launchImageLibrary(
+        {quality: 0.5, maxWidth: 200, maxHeight: 200},
+        response => {
+          if (response.didCancel || response.error) {
+            showError('oops, sepertinya anda tidak memilih foto nya?');
+          } else {
+            const params = {
+              foto : {uri: response.uri},
+              fotoForDb: (`data:${response.type};base64, ${response.data}`)
+            }
+            val.navigate('UploadStatus', params);
+          }
+        },
+      );
+    }
   };
 
   const rotation = y_translate.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '45deg'],
   });
+
 
   return (
     <View>
@@ -88,7 +109,7 @@ const ButtonAddStatus = ({setState, setHeight, navigation}) => {
         ) : (
           <View>
             <TouchableOpacity
-              onPress={() => onClickStatus(navigation)}
+              onPress={() => onClickStatus(navigation, 'pencile')}
               style={{
                 width: 40,
                 height: 40,
@@ -103,6 +124,7 @@ const ButtonAddStatus = ({setState, setHeight, navigation}) => {
               <Image style={{height: 20, width: 20}} source={Pencile} />
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => onClickStatus(navigation, 'camera')}
               style={{
                 width: 40,
                 height: 40,

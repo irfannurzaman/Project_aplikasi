@@ -1,13 +1,13 @@
 import firebase from 'firebase'
 
 firebase.initializeApp({
-    apiKey: "AIzaSyA1Z7Nc4l7Jimq2PBQgCpMu14JsbggRpx8",
-    authDomain: "my-doctor-3e73f.firebaseapp.com",
-    databaseURL: "https://my-doctor-3e73f.firebaseio.com",
-    projectId: "my-doctor-3e73f",
-    storageBucket: "my-doctor-3e73f.appspot.com",
-    messagingSenderId: "724848436804",
-    appId: "1:724848436804:web:89c8bcf289b66c1ecb7e11"
+    apiKey: "AIzaSyD4paJq9rmFiDoHsKyvUD70SpkRDkkM8HM",
+    authDomain: "aplikasi-fa598.firebaseapp.com",
+    databaseURL: "https://aplikasi-fa598.firebaseio.com",
+    projectId: "aplikasi-fa598",
+    storageBucket: "aplikasi-fa598.appspot.com",
+    messagingSenderId: "478067653588",
+    appId: "1:478067653588:web:e7b74daff48aef0306b441"
 })
 
 const Fire = firebase

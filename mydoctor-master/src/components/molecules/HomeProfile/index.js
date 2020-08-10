@@ -6,7 +6,7 @@ import { fonts, colors, getData } from '../../../utils'
 const HomeProfile = ({onPress, profile}) => {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
-        <Image source={require('../../../../assets/profile/SAM_0109.jpg')} style={styles.avatar} />
+        <Image source={profile.photo} style={styles.avatar} />
         <View>
             {/* <Text style={styles.name}>{profile.fullName}</Text> */}
             <Text style={styles.profession}>{profile.profession}</Text>
@@ -19,7 +19,8 @@ export default HomeProfile
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginRight: -25
     },
     avatar: {
         width: 46,

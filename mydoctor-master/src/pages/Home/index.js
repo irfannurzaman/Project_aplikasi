@@ -29,9 +29,6 @@ import {
   Sale,
   Jam,
 } from '../../assets';
-import axios from 'axios';
-import {onChange} from 'react-native-reanimated';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Home = ({navigation}) => {
   const [news, setNews] = useState([]);
@@ -59,15 +56,6 @@ const Home = ({navigation}) => {
   }, [navigation]);
 
   const getCategoryDoctor = async () => {
-    axios
-      .get('http://11f3b5eac1cf.ngrok.io/username')
-      .then(res =>
-        console.log(
-          'sukses:',
-          (res.data || []).length + ' characters have been fetched',
-        ),
-      )
-      .catch(err => console.log('err', err));
     const data = [
       {
         id: 1,

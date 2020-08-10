@@ -15,14 +15,14 @@ const Register = ({navigation}) => {
     const dispatch = useDispatch()
 
     const onContinue = () => {
-        dispatch({type: 'SET_LOADING', value: true})
+        // dispatch({type: 'SET_LOADING', value: true})
         Fire.auth()
             .createUserWithEmailAndPassword(form.email, form.password)
             .then(success => {
                 dispatch({type: 'SET_LOADING', value: false})
                 setForm('reset')
                 const data = {
-                    // fullName: form.fullName,
+                    fullName: form.fullName,
                     profession: form.profession,
                     email: form.email,
                     uid: success.user.uid
