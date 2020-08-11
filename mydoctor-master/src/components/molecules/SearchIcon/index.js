@@ -21,7 +21,7 @@ const SearchIcon = ({navigation, auto}) => {
             onFocus={onFocusChange}
             style={{
               marginHorizontal: 10,
-              position: 'relative',
+              position: 'relative'
             }}
           />
           <View
@@ -35,8 +35,8 @@ const SearchIcon = ({navigation, auto}) => {
             <Image
               source={IconSearch}
               style={{
-                width: 25,
-                height: 25,
+                width: 20,
+                height: 20,
                 marginHorizontal: 10,
               }}
             />
@@ -80,14 +80,14 @@ export default SearchIcon;
 const styles = StyleSheet.create({
   searchBar: auto => ({
     backgroundColor: 'white',
-    height: auto ? 40 : 50,
+    height: auto ? 40 : 40,
     width: auto? 250 : 300,
     marginHorizontal: 20,
     position: 'absolute',
     borderRadius: 20,
-    bottom: 5,
+    bottom: auto ? 0 : 15,
     elevation: auto ? 0 : 2,
-    borderWidth: 0.1,
+    borderWidth: 1,
     borderColor: '#dadbd9',
   }),
 });

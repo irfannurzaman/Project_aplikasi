@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Animated,
   Image,
-  ImageBackground,
 } from 'react-native';
 
 const UpdateStatus = ({navigation, route}) => {
@@ -18,17 +17,19 @@ const UpdateStatus = ({navigation, route}) => {
     inputRange: [0, 1],
     outputRange: ['0deg', '45deg'],
   });
-  console.log('sukses', _width)
+  console.log('sukses', updateStatusImage);
   useEffect(() => {
-    Image.getSize(updateStatusImage.params.foto.uri, (width, height) => {
-      if (width !== undefined && height !== undefined) {
-        setWidth({width, height});
-      }
-    });
+    if (updateStatusImage.params !== '') {
+      Image.getSize(updateStatusImage.params.foto.uri, (width, height) => {
+        if (width !== undefined && height !== undefined) {
+          setWidth({width, height});
+        }
+      });
+    }
   }, [updateStatusImage]);
   return (
     <View>
-      {updateStatusImage.params.foto == undefined ? (
+      {updateStatusImage.params == '' ? (
         <View>
           <TextInput
             autoFocus={true}
@@ -65,54 +66,65 @@ const UpdateStatus = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
       ) : (
-        <ImageBackground
-          source={updateStatusImage.params.foto}
-          style={{height: '100%', width: '100%'}}>
-          <View
+        <View
+          style={{
+            height: '100%',
+            width: '100%',
+            backgroundColor: 'black',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
             style={{
-              backgroundColor: 'black',
-              width: '100%',
-              height: '100%',
-              opacity: 0.5,
+              height: 200,
+              width: 200,
+              elevation: 3,
             }}
+            source={updateStatusImage.params.foto}
           />
           <View
             style={{
-              backgroundColor: 'transparent',
-              width: 370,
-              height: 500,
-              marginTop: 50,
-              marginHorizontal: 20,
-              borderRadius: 10,
-              elevation: 2,
-              position: 'absolute',
-              alignItems: 'center',
-              justifyContent: 'space-around',
+              width: '100%',
+              flexDirection: 'row',
+              marginTop: 30,
+              justifyContent: 'center',
             }}>
-            <Image
+            <View
               style={{
-                height: 200,
-                width: 200,
-                borderRadius: 10,
-                elevation: 3,
-              }}
-              source={updateStatusImage.params.foto}
-            />
-            <TextInput
-            placeholder={'Apa yang anda fikirkan?'}
-            selectionColor={'#05c5eb'}
-            underlineColorAndroid={'#05c5eb'}
-              style={{
+                width: 'auto',
+                height: 'auto',
                 backgroundColor: 'white',
                 width: 300,
-                height: 150,
-                marginTop: -50,
-                borderRadius: 10,
-                opacity: 0.4,
+                height: 40,
+                marginRight: 10,
+                borderRadius: 20,
+                alignItems: 'flex-end'
+              }}>
+              <TextInput
+                placeholder={'Add a caption...'}
+                placeholderStyle={{
+                  fontFamily: 'AnotherFont',
+                }}
+                selectionColor={'#05c5eb'}
+                style={{
+                  backgroundColor: 'white',
+                  borderRadius: 20,
+                  width: 290,
+                  
+                }}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={{
+                width: 40,
+                height: 40,
+                backgroundColor: 'blue',
+                borderRadius: 40,
               }}
             />
           </View>
-        </ImageBackground>
+        </View>
       )}
     </View>
   );

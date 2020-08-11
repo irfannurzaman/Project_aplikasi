@@ -40,10 +40,10 @@ const Home = ({navigation}) => {
     profession: '',
   });
   const [scroll] = useState(new Animated.Value(0));
-  const HEADER_SCROLL_DISTANCE = 200 - 80;
+  const HEADER_SCROLL_DISTANCE = 90 - 90;
   const headerHeight = scroll.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [200, 80],
+    outputRange: [90, 90],
     extrapolate: 'clamp',
   });
 
@@ -128,6 +128,7 @@ const Home = ({navigation}) => {
 
     setCategory(data);
   };
+  
 
   const getUserData = () => {
     getData('user').then(res => {
@@ -137,21 +138,20 @@ const Home = ({navigation}) => {
     });
   };
 
+  const [headerOpacity, setHeaderOpacity] = useState(0); //ini
+
+  const _handleHeaderColor = event => {
+    let y = event.nativeEvent.contentOffset.y;
+
+    setHeaderOpacity(y / 80);
+  };
+
   return (
     <View>
-      <ScrollView
-        onScroll={Animated.event([
-          {
-            nativeEvent: {
-              contentOffset: {
-                y: scroll,
-              },
-            },
-          },
-        ])}>
+      <ScrollView onScroll={event => _handleHeaderColor(event)}>
         <View style={styles.wrapperSection}>
-          <View style={{marginTop: 80, alignItems: 'flex-end'}}>
-            <HomeProfile
+          <View style={{marginTop: 80, marginHorizontal: 20}}>
+            <HomeProfile  
               profile={profile}
               onPress={() => navigation.navigate('UserProfile', profile)}
             />
@@ -197,7 +197,7 @@ const Home = ({navigation}) => {
         <Gap height={70} />
       </ScrollView>
       <Animated.View style={[styles.header, {height: headerHeight}]}>
-        <View style={styles.bar(scroll)}>
+        <View style={styles.bar(headerOpacity)}>
           <SearchIcon navigation={navigation} auto={false} />
         </View>
       </Animated.View>
@@ -213,12 +213,13 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    width: 330,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
-  bar: val => ({
-    height: '100%',
+  bar: headerOpacity => ({
     flex: 1,
+    backgroundColor: headerOpacity > 1 ? 'white' : 'transparent',
+    elevation: headerOpacity > 1 ? 3 : 0,
+    alignItems: 'center'
   }),
   page: {
     flex: 1,
@@ -258,6 +259,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     elevation: 15,
+    justifyContent: 'center'
   },
   wrapperSection1: {
     marginTop: 15,
