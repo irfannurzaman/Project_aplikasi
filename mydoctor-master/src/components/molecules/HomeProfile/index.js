@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { DummyUser, ILNullPhoto } from '../../../assets'
 import { fonts, colors, getData } from '../../../utils'
 
+
 const HomeProfile = ({onPress, profile}) => {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -20,11 +21,11 @@ export default HomeProfile
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginRight: -25
+        marginRight: '-13%'
     },
     avatar: {
-        width: 46,
-        height: 46,
+        width: 40,
+        height: '100%',
         borderRadius: 46 / 2,
         marginRight: 12
     },

@@ -1,13 +1,14 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {colors, fonts} from '../../../utils';
 
 const RatedDoctor = ({onPress, item}) => {
+  const [screenData, setScreenData] = useState(Dimensions.get('window'));
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.border}>
-        <View style={styles.container}>
+      <View style={styles.border(screenData)}>
+        <View style={styles.container(screenData)}>
           <Image
             style={{height: '100%', width: '100%', borderRadius: 20}}
             source={item.image}
@@ -63,19 +64,19 @@ const RatedDoctor = ({onPress, item}) => {
 export default RatedDoctor;
 
 const styles = StyleSheet.create({
-  container: {
+  container: (screenData) =>  ({
     marginHorizontal: 25,
-    height: 170,
+    height: screenData.height/3.7,
     width: 'auto',
     marginTop: 0,
     flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: 20,
     elevation: 5,
-  },
-  border: {
+  }),
+  border: (screenData)  => ({
     width: '100%',
-    height: 250,
-    marginTop: 10,
-  },
+    height: screenData.height/2.4,
+    marginTop: 10
+  }),
 });

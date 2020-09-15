@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Image, Animated, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, Image, Dimensions} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -17,30 +17,33 @@ import {
   UpdateProfile,
   DoctorProfile,
   PageNews,
+  PageSort
 } from '../pages';
 import {useSelector} from 'react-redux'
 import {buttonHome, message, News} from '../assets';
-import {Search, UploadStatus} from '../components';
+import {Search, UploadStatus, useScreenDimensions} from '../components';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const IconBottom = props => {
+  const screenData = useScreenDimensions()
+  console.log('sukses12', screenData)
   const {color, focused} = props.data;
   let colorSelected = focused ? color : '#9c9998';
   return (
     <View
       style={{
-        flex: 1,
+        height: 40,
+        alignContent: 'center',
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10,
+        marginTop: screenData.isLandscape? 0 : 10,
       }}>
       <Image
         source={props.image}
         style={{
           width: 30,
-          height: props.ky == 'nws' ? 25 : 30,
+          height: props.ky == 'nws' ? 25: 30,
           tintColor: colorSelected,
         }}
       />
@@ -53,19 +56,22 @@ const MainApp = () => {
     <Tab.Navigator
       tabBarOptions={{
         style: {
-          height: 60,
-          // backgroundColor: '#272727',
+          height: 45,
           borderRadius: 20,
           position: 'absolute',
           marginBottom: 20,
           marginHorizontal: 20,
-          borderWidth: 0.5,
-          borderColor: '#272727'
         },
       }}>
       <Tab.Screen
         name="Home"
         component={Home}
+        tabBarOptions={{
+          style: {
+            backgroundColor: 'blue',
+            height: 100,
+          }
+        }}
         options={{
           tabBarIcon: props => (
             <IconBottom data={props} image={buttonHome} ky={'hm'} />
@@ -183,6 +189,11 @@ const Router = () => {
       <Stack.Screen
         name="UploadStatus"
         component={UploadStatus}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="PageSort"
+        component={PageSort}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -1,36 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Image,
-  View,
-  Animated,
-  TextInput,
-} from 'react-native';
-import {
-  DoctorCategory,
-  Gap,
-  HomeProfile,
-  NewsItem,
-  RatedDoctor,
-  SearchIcon,
-} from '../../components';
-import {colors, fonts, showError, getData} from '../../utils';
-import {
-  ILNullPhoto,
-  ILkopi,
-  IconSearch,
-  Ceker,
-  Seblak,
-  Bakso,
-  PecelLele,
-  IcMaps,
-  Delivery,
-  Sale,
-  Jam,
-} from '../../assets';
+import React, { useEffect, useState } from 'react';
+import {  ScrollView, StyleSheet, Image, View, Animated, TextInput,} from 'react-native';
+import { DoctorCategory, Gap, HomeProfile, NewsItem, RatedDoctor, SearchIcon, useScreenDimensions} from '../../components';
+import { colors, fonts, showError, getData } from '../../utils';
+import {ILNullPhoto,ILkopi,IconSearch,Ceker,Seblak,Bakso,PecelLele,IcMaps,Delivery,Sale,Jam} from '../../assets';
 
 const Home = ({navigation}) => {
+  const screenData = useScreenDimensions();
   const [news, setNews] = useState([]);
   const [category, setCategory] = useState([]);
   const [categoryDoctor, setCategoryDoctor] = useState([]);
@@ -40,10 +15,15 @@ const Home = ({navigation}) => {
     profession: '',
   });
   const [scroll] = useState(new Animated.Value(0));
-  const HEADER_SCROLL_DISTANCE = 90 - 90;
+  const HEADER_SCROLL_DISTANCE = screenData.isLandscape ?
+    screenData.height / 5 - screenData.height / 5 :
+    screenData.height / 10 - screenData.height / 10;
   const headerHeight = scroll.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [90, 90],
+    outputRange: [
+      screenData.isLandscape ? screenData.height / 5 : screenData.height / 7.5,
+      screenData.isLandscape ? screenData.height / 5 : screenData.height / 10,
+    ],
     extrapolate: 'clamp',
   });
 
@@ -56,15 +36,15 @@ const Home = ({navigation}) => {
   }, [navigation]);
 
   const getCategoryDoctor = async () => {
-    const data = [
-      {
+    const data = [{
         id: 1,
         category: 'Kopi Dingin',
         price: '15.000',
         image: ILkopi,
         alamat: 'Desa Kebanggan',
         kec: 'Moga',
-        distance: '10KM'
+        distance: '10KM',
+        discription: 'kopi dengan rasa yang nikmat',
       },
       {
         id: 2,
@@ -73,7 +53,8 @@ const Home = ({navigation}) => {
         image: Ceker,
         alamat: 'Desa Gendoang',
         kec: 'Moga',
-        distance: '4KM'
+        distance: '4KM',
+        discription: 'Pedas yang menggila',
       },
       {
         id: 3,
@@ -82,7 +63,8 @@ const Home = ({navigation}) => {
         image: Seblak,
         alamat: 'Randudongkal',
         kec: 'Randudongkal',
-        distance: '10KM'
+        distance: '10KM',
+        discription: 'Pedas yang menggila',
       },
       {
         id: 4,
@@ -91,7 +73,8 @@ const Home = ({navigation}) => {
         image: Bakso,
         alamat: 'Sima',
         kec: 'Moga',
-        distance: '1KM'
+        distance: '1KM',
+        discription: 'Rasa Yang nikmat',
       },
       {
         id: 5,
@@ -100,15 +83,15 @@ const Home = ({navigation}) => {
         image: PecelLele,
         alamat: 'MOga',
         kec: 'Moga',
-        distance: '6KM'
+        distance: '6KM',
+        discription: 'Lele segar dg varian sambel',
       },
     ];
     setCategoryDoctor(data);
   };
 
   const kategori = () => {
-    const data = [
-      {
+    const data = [{
         image: IcMaps,
         text: 'Terdekat',
       },
@@ -128,12 +111,13 @@ const Home = ({navigation}) => {
 
     setCategory(data);
   };
-  
 
   const getUserData = () => {
     getData('user').then(res => {
       const data = res;
-      data.photo = res.photo.length > 1 ? {uri: res.photo} : ILNullPhoto;
+      data.photo = res.photo.length > 1 ? {
+        uri: res.photo
+      } : ILNullPhoto;
       setProfile(res);
     });
   };
@@ -146,61 +130,78 @@ const Home = ({navigation}) => {
     setHeaderOpacity(y / 80);
   };
 
-  return (
-    <View>
-      <ScrollView onScroll={event => _handleHeaderColor(event)}>
-        <View style={styles.wrapperSection}>
-          <View style={{marginTop: 80, marginHorizontal: 20}}>
-            <HomeProfile  
-              profile={profile}
-              onPress={() => navigation.navigate('UserProfile', profile)}
-            />
-          </View>
-        </View>
-        <View style={styles.wrapperScroll}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.category}>
-              <Gap width={32} />
-              {category.map(item => {
-                return (
-                  <DoctorCategory
-                    key={item.id}
-                    category={item}
-                    onPress={() => navigation.navigate('Maps', item)}
-                  />
-                );
-              })}
-              <Gap width={22} />
-            </View>
-          </ScrollView>
-        </View>
-        <View style={styles.wrapperSection1}>
-          {categoryDoctor.map(item => {
-            return (
-              <RatedDoctor
-                item={item}
-                onPress={() => navigation.navigate('ItemsProduct', item)}
-              />
-            );
-          })}
-        </View>
-        {news.map(item => {
-          return (
-            <NewsItem
-              key={item.id}
-              title={item.title}
-              date={item.date}
-              image={item.image}
-            />
-          );
-        })}
-        <Gap height={70} />
-      </ScrollView>
-      <Animated.View style={[styles.header, {height: headerHeight}]}>
-        <View style={styles.bar(headerOpacity)}>
-          <SearchIcon navigation={navigation} auto={false} />
-        </View>
-      </Animated.View>
+  return ( <View>
+    <ScrollView 
+    onScroll = {
+      event => _handleHeaderColor(event)
+    } >
+    <View style = {
+      styles.wrapperSection(screenData)
+    } >
+    <View style = {
+      {
+        marginTop: 80,
+        marginHorizontal: 20
+      }
+    } >
+    <HomeProfile 
+    profile={profile}
+    onPress={() => navigation.navigate('UserProfile', profile)}/> 
+    </View> 
+    </View> 
+    <View style={styles.wrapperScroll}>
+    <ScrollView horizontal showsHorizontalScrollIndicator = {false}>
+    <View style={styles.category}>
+    <Gap width = {32}/> 
+    {
+      category.map(item => {
+        return ( <DoctorCategory 
+          key = {item.id}
+          category = {item}
+          onPress = {() => navigation.navigate('PageSort', item)}
+          />
+        );
+      })
+    } 
+    <Gap width = {22}/> 
+    </View> 
+    </ScrollView> 
+    </View> 
+    <View style={styles.wrapperSection1}> 
+    {
+      categoryDoctor.map(item => {
+        return ( <RatedDoctor 
+          item = {item}
+          onPress = {() => navigation.navigate('ItemsProduct', item)}/>
+        );
+      })
+    } 
+    </View> 
+    {
+      news.map(item => {
+        return ( 
+        <NewsItem 
+        key={item.id}
+        title={item.title}
+        date={item.date}
+        image={item.image}/>
+        );
+      })
+    } 
+    <Gap height = {70}/> 
+    </ScrollView> 
+    <Animated.View 
+    style={
+      [styles.header, {
+        height: headerHeight
+      }]
+    } >
+    <View 
+    style={styles.bar(headerOpacity)}>
+    <SearchIcon navigation={navigation}
+    auto={false}/> 
+    </View> 
+    </Animated.View> 
     </View>
   );
 };
@@ -213,13 +214,13 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   bar: headerOpacity => ({
     flex: 1,
     backgroundColor: headerOpacity > 1 ? 'white' : 'transparent',
     elevation: headerOpacity > 1 ? 3 : 0,
-    alignItems: 'center'
+    alignItems: 'center',
   }),
   page: {
     flex: 1,
@@ -227,8 +228,6 @@ const styles = StyleSheet.create({
   content: {
     backgroundColor: 'white',
     flex: 1,
-    // borderBottomLeftRadius: 20,
-    // borderBottomRightRadius: 20
   },
   welcome: {
     fontSize: 20,
@@ -252,15 +251,18 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 16,
   },
-  wrapperSection: {
+  wrapperSection: screenData => ({
     paddingHorizontal: 0,
     backgroundColor: colors.button.primary.background,
-    height: 215,
+    height: screenData.isLandscape ?
+      screenData.height / 2.7 :
+      screenData.height / 4,
+    width: '100%',
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     elevation: 15,
-    justifyContent: 'center'
-  },
+    justifyContent: 'center',
+  }),
   wrapperSection1: {
     marginTop: 15,
   },

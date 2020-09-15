@@ -1,68 +1,119 @@
-import React, {useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View, YellowBox} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {ILLogo} from '../../assets';
-import {Button, Gap, Input, Link} from '../../components';
-import {Fire} from '../../config';
-import {colors, fonts, showError, storeData, useForm} from '../../utils';
+import React, {
+  useEffect
+} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  YellowBox
+} from 'react-native';
+import {
+  useDispatch
+} from 'react-redux';
+import {
+  ILLogo
+} from '../../assets';
+import {
+  Button,
+  Gap,
+  Input,
+  Link
+} from '../../components';
+import {
+  Fire
+} from '../../config';
+import {
+  colors,
+  fonts,
+  showError,
+  storeData,
+  useForm
+} from '../../utils';
 
-const Login = ({navigation}) => {
-  const [form, setForm] = useForm({email: '', password: ''});
+const Login = ({
+  navigation
+}) => {
+  const [form, setForm] = useForm({
+    email: '',
+    password: ''
+  });
   const dispatch = useDispatch();
 
   const login = () => {
-    dispatch({type: 'SET_LOADING', value: false});
+    dispatch({
+      type: 'SET_LOADING',
+      value: false
+    });
     Fire.auth()
-    .signInWithEmailAndPassword(form.email, form.password)
-    .then(res => {
-        console.log('sukses123', res)
-        dispatch({type: 'SET_LOADING', value: false});
+      .signInWithEmailAndPassword(form.email, form.password)
+      .then(res => {
+        dispatch({
+          type: 'SET_LOADING',
+          value: false
+        });
+        navigation.replace('MainApp');
         Fire.database()
-        .ref(`users/${res.user.uid}/`)
-        .once('value')
-        .then(resDB => {
+          .ref(`users/${res.user.uid}/`)
+          .once('value')
+          .then(resDB => {
             if (resDB.val()) {
-                storeData('user', resDB.val());
-                navigation.replace('MainApp');
+              storeData('user', resDB.val());
             }
           });
       })
       .catch(err => {
-        dispatch({type: 'SET_LOADING', value: false});
+        dispatch({
+          type: 'SET_LOADING',
+          value: false
+        });
         showError(err.message);
       });
   };
 
-  return (
-    <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Gap height={40} />
-        <ILLogo />
-        <Text style={styles.title}>Masuk Untuk Pesan</Text>
-        <Input
-          label="Email Address"
-          value={form.email}
-          onChangeText={value => setForm('email', value)}
-        />
-        <Gap height={24} />
-        <Input
-          label="Password"
-          value={form.password}
-          onChangeText={value => setForm('password', value)}
-          secureTextEntry
-        />
-        <Gap height={10} />
-        <Link title="Forgot My Password" size={12} />
-        <Gap height={40} />
-        <Button title="Sign in" onPress={login} />
-        <Gap height={30} />
-        <Link
-          title="Create New Account"
-          size={16}
-          align="center"
-          onPress={() => navigation.navigate('Register')}
-        />
-      </ScrollView>
+  return ( 
+  <View 
+  style={styles.page}>
+  <ScrollView 
+  showsVerticalScrollIndicator={false}>
+    <Gap height={40}/> 
+    <ILLogo/>
+    <Text 
+    style={styles.title}> 
+    Masuk Untuk Pesan 
+    </Text>
+    <Input 
+    label="Email Address"
+    value={form.email}
+    onChangeText={value => setForm('email', value)}/> 
+    <Gap height={24}/> 
+    <Input 
+    label="Password"
+    value={form.password}
+    onChangeText={value => setForm('password', value)}
+    secureTextEntry 
+    />
+    <Gap height={10}
+    /> 
+    <Link 
+    title="Forgot My Password"
+    size={12}
+    /> 
+    <Gap height={40}/> 
+    <Button 
+    title="Sign in"
+    onPress={login}/> 
+    <Gap 
+    height = {30}/> 
+    <Link 
+    title = "Create New Account"
+    size = {16}
+    align = "center"
+    onPress = {
+      () => navigation.navigate('Register')
+    }
+    /> 
+    </ScrollView> 
     </View>
   );
 };

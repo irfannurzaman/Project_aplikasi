@@ -8,10 +8,10 @@ const GetStarted = ({navigation}) => {
     return (
         <ImageBackground source={ILGetStarted} style={styles.page}>
             <View>
-                <ILLogo/>
-                <Text style={styles.tittle}>
+                {/* <ILLogo/> */}
+                {/* <Text style={styles.tittle}>
                     Pesan Makanan Jadi Lebih Mudah
-                </Text>
+                </Text> */}
             </View>
             <View>
                 <Button title="Get Started" onPress={() => navigation.navigate('Register')} />
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     },
     tittle: {
         fontSize: 28,
-        color: colors.white,
+        color: colors.primary,
         marginTop: 91,
-        fontFamily: fonts.primary[600]
+        fontFamily: fonts.primary[600],
+        backgroundColor: 'white',
     }
 })

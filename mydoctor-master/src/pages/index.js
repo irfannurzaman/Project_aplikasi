@@ -12,6 +12,7 @@ import UserProfile from './UserProfile'
 import UpdateProfile from './UpdateProfile'
 import DoctorProfile from './DoctorProfile'
 import PageNews from './news'
+import PageSort from './PageSort'
 
 export { 
     Splash, 
@@ -27,5 +28,6 @@ export {
     UserProfile, 
     UpdateProfile,
     DoctorProfile,
-    PageNews
+    PageNews,
+    PageSort
 };

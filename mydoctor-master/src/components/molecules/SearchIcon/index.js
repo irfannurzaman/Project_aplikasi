@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -7,21 +7,25 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {IconSearch} from '../../../assets';
+import { useScreenDimensions } from '../../index'
 
-const SearchIcon = ({navigation, auto}) => {
+const SearchIcon = ({navigation, auto, sort}) => {
+  const screenData = useScreenDimensions()
+  console.log('sukses1', screenData.width /2)
   const onFocusChange = () => {
     <TouchableOpacity onPress={navigation.navigate('MyModalSearch')} />;
   };
   return (
-    <View style={styles.searchBar(auto)}>
+    <View style={styles.searchBar(auto, screenData)}>
       {!auto ? (
-        <View>
+        <View style={{width: '100%', height: '100%', justifyContent: 'center'}}>
           <TextInput
             placeholder="What do you want to eat?"
             onFocus={onFocusChange}
             style={{
               marginHorizontal: 10,
-              position: 'relative'
+              position: 'relative',
+              height: 50,
             }}
           />
           <View
@@ -35,7 +39,7 @@ const SearchIcon = ({navigation, auto}) => {
             <Image
               source={IconSearch}
               style={{
-                width: 20,
+                width:  20,
                 height: 20,
                 marginHorizontal: 10,
               }}
@@ -45,8 +49,7 @@ const SearchIcon = ({navigation, auto}) => {
       ) : (
         <View>
           <TextInput
-            placeholder="What do you want to eat?"
-            autoFocus={true}
+            autoFocus={sort ? false : true}
             style={{
               marginHorizontal: 10,
               position: 'relative',
@@ -78,16 +81,16 @@ const SearchIcon = ({navigation, auto}) => {
 export default SearchIcon;
 
 const styles = StyleSheet.create({
-  searchBar: auto => ({
+  searchBar: (auto, screenData) => ({
     backgroundColor: 'white',
-    height: auto ? 40 : 40,
-    width: auto? 250 : 300,
+    height: auto ?30 : screenData. isLandscape? screenData.width/21:  screenData.width /13,
+    width: auto? 270 : screenData.width /1.2,
     marginHorizontal: 20,
     position: 'absolute',
     borderRadius: 20,
     bottom: auto ? 0 : 15,
     elevation: auto ? 0 : 2,
     borderWidth: 1,
-    borderColor: '#dadbd9',
+    borderColor: '#dadbd9'
   }),
 });

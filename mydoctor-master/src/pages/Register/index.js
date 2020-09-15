@@ -47,7 +47,7 @@ const Register = ({navigation}) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Input label="Full Name" value={form.fullName} onChangeText={(value) => setForm('fullName', value)} />
                     <Gap height={24} />
-                    <Input label="Pekerjaan" value={form.profession} onChangeText={(value) => setForm('profession', value)} />
+                    <Input label="Nomer Hp" value={form.profession} onChangeText={(value) => setForm('profession', value)} />
                     <Gap height={24} />
                     <Input label="Email" value={form.email} onChangeText={(value) => setForm('email', value)} />
                     <Gap height={24} />

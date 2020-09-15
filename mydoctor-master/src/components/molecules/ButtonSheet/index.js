@@ -15,7 +15,7 @@ const ButtonSheet = ({state, setState}) => {
 
   const menu_moveY = y_translate.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, -330],
+    outputRange: [0, -160],
   });
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     bottom: -300,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     alignItems: 'center',
     borderRadius: 20,
   },
